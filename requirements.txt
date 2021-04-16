@@ -11,3 +11,6 @@ bs4
 bert
 bert-tensorflow
 lxml
+sentencepiece
+tf-models-nightly
+tf-nightly
