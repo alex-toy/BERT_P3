@@ -1,0 +1,1 @@
+Inside folder data, put the files you want to train your model on.

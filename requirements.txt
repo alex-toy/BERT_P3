@@ -1,0 +1,13 @@
+numpy==1.19.2
+pandas
+tensorflow
+tensorflow_datasets
+joblib
+pickle-mixin
+bert-for-tf2
+sentencepiece
+tensorflow_hub
+bs4
+bert
+bert-tensorflow
+lxml
