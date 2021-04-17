@@ -1,6 +1,8 @@
 import tensorflow as tf
 import tensorflow_hub as hub
 
+from app.model.BertSquadLayer import BertSquadLayer
+
 class BERTSquad(tf.keras.Model):
     
     def __init__(self,

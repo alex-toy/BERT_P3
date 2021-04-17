@@ -1,3 +1,6 @@
+import tensorflow as tf
+
+
 class BertSquadLayer(tf.keras.layers.Layer):
 
   def __init__(self):
