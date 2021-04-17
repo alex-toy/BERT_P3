@@ -1,3 +1,5 @@
+import tensorflow as tf
+
 class BERTSquad(tf.keras.Model):
     
     def __init__(self,
