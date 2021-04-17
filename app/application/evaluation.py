@@ -87,6 +87,37 @@ if __name__ == "__main__":
     RawResult = collections.namedtuple("RawResult", ["unique_id", "start_logits", "end_logits"])
 
 
+    # bert_squad!!!!
+    
+    all_results = []
+    for count, inputs in enumerate(eval_dataset):
+        x, _ = inputs  
+        unique_ids = x.pop("unique_ids")
+        start_logits, end_logits = bert_squad(x, training=False)
+        output_dict = dict(
+            unique_ids=unique_ids,
+            start_logits=start_logits,
+            end_logits=end_logits)
+        for result in get_raw_results(output_dict):
+            all_results.append(result)
+        if count % 100 == 0:
+            print("{}/{}".format(count, 2709))
+
+
+    write_predictions(
+        eval_examples,
+        eval_features,
+        all_results,
+        20,
+        30,
+        True,
+        cf.OUTPUT_PRED_FILE,
+        cf.OUTPUT_NBEST_FILE,
+        cf.OUTPUT_NULL_LOG_ODDS_FILE,
+        verbose=False
+    )
+
+
 
 
 
