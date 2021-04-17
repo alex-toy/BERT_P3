@@ -72,3 +72,28 @@ if __name__ == "__main__":
         ckpt.restore(ckpt_manager.latest_checkpoint)
         print("Last checkpoint restored!!")
 
+
+    for epoch in range(NB_EPOCHS):
+        print(f"Epoch start {epoch+1}")
+        start = time.time()
+        
+        train_loss.reset_states()
+        
+        for (batch, (inputs, targets)) in enumerate(train_dataset_light):
+            with tf.GradientTape() as tape:
+                model_outputs = bert_squad(inputs)
+                loss = squad_loss_fn(targets, model_outputs)
+            
+            gradients = tape.gradient(loss, bert_squad.trainable_variables)
+            optimizer.apply_gradients(zip(gradients, bert_squad.trainable_variables))
+            
+            train_loss(loss)
+            
+            if batch % 50 == 0:
+                print(f"Epoch {epoch+1} Batch {batch} Loss {train_loss.result():.4f}")
+            
+            if batch % 500 == 0:
+                ckpt_save_path = ckpt_manager.save()
+                print(f"Keeping checkpoint for epoch {epoch+1} in folder {ckpt_save_path}")
+        print(f"Total time for training epoch: {time.time() - start} segs\n")
+
