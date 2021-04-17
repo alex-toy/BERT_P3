@@ -9,6 +9,7 @@ models/*
 data/dev-v1.1.json
 data/train-v1.1.json
 data/vocab.txt
+data/train_meta_data
 
 output/inputs.csv
 output/outputs.csv
