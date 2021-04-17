@@ -15,6 +15,7 @@ OUTPUTS_FILE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '../
 OUTPUT_PRED_FILE = os.path.join(OUTPUTS_FILE_PATH, 'predictions.json')
 OUTPUT_NBEST_FILE = os.path.join(OUTPUTS_FILE_PATH, 'nbest_predictions.json')
 OUTPUT_NULL_LOG_ODDS_FILE = os.path.join(OUTPUTS_FILE_PATH, 'null_odds.json')
+OUTPUT_EVAL_FILE = os.path.join(OUTPUTS_FILE_PATH, 'eval.tf_record')
 
 
 BATCH_SIZE = 4

@@ -14,6 +14,33 @@ do_lower_case = my_bert_layer.resolved_object.do_lower_case.numpy()
 tokenizer = FullTokenizer(vocab_file, do_lower_case)
 
 
+def get_raw_results(predictions):
+    for unique_ids, start_logits, end_logits in zip(predictions['unique_ids'],
+                                                    predictions['start_logits'],
+                                                    predictions['end_logits']):
+        yield RawResult(
+            unique_id=unique_ids.numpy(),
+            start_logits=start_logits.numpy().tolist(),
+            end_logits=end_logits.numpy().tolist()
+        )
+
+
+
+def _append_feature(feature, is_padding):
+    eval_features = []
+    eval_writer = FeatureWriter(
+        filename=os.path.join(
+            "/content/drive/My Drive/Curso de NLP/BERT/squad_data/",
+            "eval.tf_record"
+        ),
+        is_training=False
+    )
+    if not is_padding:
+        eval_features.append(feature)
+    eval_writer.process_feature(feature)
+    eval_writer.close()
+
+
 
 def is_whitespace(c):
     '''
