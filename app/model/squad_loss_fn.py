@@ -1,3 +1,6 @@
+import tensorflow as tf
+
+
 def squad_loss_fn(labels, model_outputs):
     start_positions = labels['start_positions']
     end_positions = labels['end_positions']

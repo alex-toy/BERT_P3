@@ -20,6 +20,8 @@ import json
 import collections
 import os
 
+from joblib import dump, load
+
 import app.config as cf
 
 
@@ -73,7 +75,7 @@ if __name__ == "__main__":
         print("Last checkpoint restored!!")
 
 
-    for epoch in range(NB_EPOCHS):
+    for epoch in range(cf.NB_EPOCHS):
         print(f"Epoch start {epoch+1}")
         start = time.time()
         
@@ -96,4 +98,8 @@ if __name__ == "__main__":
                 ckpt_save_path = ckpt_manager.save()
                 print(f"Keeping checkpoint for epoch {epoch+1} in folder {ckpt_save_path}")
         print(f"Total time for training epoch: {time.time() - start} segs\n")
+
+
+    dump(bert_squad, os.path.join(cf.OUTPUTS_MODELS_DIR, 'bert_squad.joblib'))
+    
 
